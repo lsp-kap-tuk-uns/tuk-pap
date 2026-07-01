@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUK LSP-KAP Universitas Sebelas Maret</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        unsBlue: '#003366',
+                        unsLightBlue: '#005a9c',
+                        unsTeal: '#00a896',
+                        unsGold: '#e6a100',
+                        unsDark: '#0f172a',
+                        unsSlate: '#64748b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-pattern {
+            background-color: #003366;
+            background-image: radial-gradient(rgba(230, 161, 0, 0.15) 1.5px, transparent 0), radial-gradient(rgba(0, 90, 156, 0.3) 1.5px, transparent 0);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen antialiased">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-gradient-to-r from-unsBlue via-unsLightBlue to-unsTeal text-white text-xs py-2 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-2 z-50 relative">
+        <div class="flex items-center gap-4 flex-wrap justify-center">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-map-location-dot text-unsGold"></i> Gedung B FKIP UNS</span>
+            <span class="hidden sm:inline-flex items-center gap-1.5"><i class="fa-solid fa-envelope text-unsGold"></i> pap@fkip.uns.ac.id</span>
+            <span class="bg-amber-500/20 text-unsGold px-2.5 py-0.5 rounded-full font-semibold border border-unsGold/30 text-[10px]">TUK Sertifikasi KAP</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="#tentang" class="hover:text-unsGold transition-colors">Profil</a>
+            <span class="text-white/30">|</span>
+            <a href="#skema" class="hover:text-unsGold transition-colors">Skema</a>
+            <span class="text-white/30">|</span>
+            <a href="#alur" class="hover:text-unsGold transition-colors">Alur Sertifikasi</a>
+            <span class="text-white/30">|</span>
+            <a href="#kontak" class="hover:text-unsGold transition-colors">Kontak</a>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="bg-yellow-200/95 backdrop-blur shadow-sm sticky top-0 z-40 transition-all duration-300 border-b-2 border-unsBlue/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center">
+            
+            <!-- BRAND LOGO -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 bg-unsBlue rounded-full flex items-center justify-center border-2 border-unsGold p-1 shadow-md transition-transform duration-300 group-hover:scale-105">
+                    <!-- SVG UNS Emblem Simplified -->
+                    <svg viewBox="0 0 100 100" class="w-full h-full fill-white">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#e6a100" stroke-width="5"/>
+                        <path d="M50 15 L20 40 L30 75 L70 75 L80 40 Z" fill="#005a9c"/>
+                        <polygon points="50,22 35,42 45,42 42,68 65,35 52,35" fill="#e6a100" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-md font-extrabold text-unsBlue tracking-tight leading-tight group-hover:text-unsLightBlue transition-colors">TUK LSP-KAP</h1>
+                    <p class="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Universitas Sebelas Maret</p>
+                </div>
+            </a>
+
+            <!-- DESKTOP NAVIGATION -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-bold text-unsBlue">
+                <a href="#beranda" class="hover:text-unsTeal transition-colors">Beranda</a>
+                <a href="#tentang" class="hover:text-unsTeal transition-colors">Profil</a>
+                <a href="#skema" class="hover:text-unsTeal transition-colors">Skema Uji</a>
+                <a href="#alur" class="hover:text-unsTeal transition-colors">Alur</a>
+                <a href="#verifikasi" class="hover:text-unsTeal transition-colors">Cek Sertifikat</a>
+                <a href="#kontak" class="hover:text-unsTeal transition-colors">Kontak</a>
+                <button onclick="toggleModal('portalModal')" class="px-4 py-2 bg-gradient-to-r from-unsBlue to-unsLightBlue text-white rounded-lg hover:from-unsLightBlue hover:to-unsTeal transition-all shadow-md text-xs font-bold tracking-wider uppercase">
+                    PORTAL ASESI
+                </button>
+            </nav>
+
+            <!-- MOBILE MENU BUTTON -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-unsBlue focus:outline-none" aria-label="Toggle Menu">
+                <i id="mobileMenuIcon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- MOBILE NAVIGATION DROPDOWN -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 py-4 px-6 space-y-3 transition-all duration-300">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="block font-bold text-unsBlue hover:text-unsTeal py-1">Beranda</a>
+            <a href="#tentang" onclick="toggleMobileMenu()" class="block font-bold text-unsBlue hover:text-unsTeal py-1">Profil</a>
+            <a href="#skema" onclick="toggleMobileMenu()" class="block font-bold text-unsBlue hover:text-unsTeal py-1">Skema Uji</a>
+            <a href="#alur" onclick="toggleMobileMenu()" class="block font-bold text-unsBlue hover:text-unsTeal py-1">Alur</a>
+            <a href="#verifikasi" onclick="toggleMobileMenu()" class="block font-bold text-unsBlue hover:text-unsTeal py-1">Cek Sertifikat</a>
+            <a href="#kontak" onclick="toggleMobileMenu()" class="block font-bold text-unsBlue hover:text-unsTeal py-1">Kontak</a>
+            <button onclick="toggleMobileMenu(); toggleModal('portalModal')" class="w-full text-center px-4 py-2.5 bg-gradient-to-r from-unsBlue to-unsLightBlue text-white rounded-lg hover:from-unsLightBlue hover:to-unsTeal font-bold text-xs tracking-wider">
+                PORTAL ASESI
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section id="beranda" class="hero-pattern text-white relative overflow-hidden flex-shrink-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-unsBlue/95 z-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-8 flex flex-col gap-6 text-center lg:text-left">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-unsGold/20 border border-unsGold/40 text-unsGold rounded-full text-xs font-semibold tracking-wide w-fit mx-auto lg:mx-0">
+                    <i class="fa-solid fa-award"></i> Tempat Uji Kompetensi Terverifikasi (TUK Mandiri)
+                </span>
+                
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                    TUK LSP-KAP <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-unsGold to-amber-300">Universitas Sebelas Maret</span>
+                </h2>
+                
+                <p class="text-base md:text-lg text-slate-200 font-light leading-relaxed max-w-2xl">
+                    "Uji keahlian dan raih sertifikasi kompetensi kerja nasional di bidang <span class="font-semibold text-white">Administrasi Perkantoran (AP)</span> berstandar Badan Nasional Sertifikasi Profesi (BNSP)."
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-2">
+                    <button onclick="toggleModal('portalModal')" class="px-6 py-3 bg-gradient-to-r from-unsGold to-amber-500 text-unsDark font-extrabold rounded-xl shadow-lg hover:scale-[1.02] active:scale-95 transition-all text-center text-sm">
+                        Daftar Sertifikasi Sekarang
+                    </button>
+                    <a href="#tentang" class="px-6 py-3 bg-white/10 hover:bg-white/15 text-white font-bold rounded-xl border border-white/20 transition-all text-center text-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-circle-info text-unsGold"></i> Pelajari Profil TUK
+                    </a>
+                </div>
+            </div>
+
+            <!-- QUICK STATISTICS CARD -->
+            <div class="lg:col-span-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 shadow-xl text-white">
+                <h3 class="font-bold text-lg mb-4 text-unsGold border-b border-white/10 pb-2"><i class="fa-solid fa-chart-line mr-2"></i> Kinerja TUK</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-300 text-sm">Asesi Tersertifikasi</span>
+                        <span class="font-bold text-xl text-white">1,240+</span>
+                    </div>
+                    <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                        <div class="bg-unsGold h-full rounded-full" style="width: 85%"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-300 text-sm">Asesor Kompetensi</span>
+                        <span class="font-bold text-xl text-white">12 Personel</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-300 text-sm">Skema Uji Kompetensi</span>
+                        <span class="font-bold text-xl text-white">4 Skema</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-300 text-sm">Tingkat Kelulusan</span>
+                        <span class="font-bold text-xl text-emerald-400">94.8%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROFIL SECTION -->
+    <section id="tentang" class="py-20 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold text-unsLightBlue uppercase tracking-widest block mb-2">PROFIL UTAMA</span>
+                <h3 class="text-3xl font-extrabold text-slate-800 sm:text-4xl">Tempat Uji Kompetensi PAP UNS</h3>
+                <div class="w-20 h-1 bg-unsGold mx-auto mt-4 rounded-full"></div>
+                <p class="text-slate-600 mt-4 leading-relaxed">
+                    TUK LSP-KAP Universitas Sebelas Maret merupakan pusat pelaksanaan uji kompetensi profesi yang terintegrasi di bawah Program Studi Pendidikan Administrasi Perkantoran (PAP), Fakultas Keguruan dan Ilmu Pendidikan, Universitas Sebelas Maret.
+                </p>
+            </div>
+
+            <!-- TUK VALUES -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/60 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-unsBlue/10 text-unsBlue rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-square-poll-vertical"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-lg mb-2">Terstandar Nasional</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">Seluruh proses asesmen menggunakan instrumen yang divalidasi oleh Lembaga Sertifikasi Profesi (LSP) berlisensi BNSP.</p>
+                </div>
+                
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/60 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-unsTeal/10 text-unsTeal rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-users-gear"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-lg mb-2">Asesor Profesional</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">Didukung oleh tim asesor kompetensi yang memiliki sertifikasi resmi dan berpengalaman luas di bidang administrasi perkantoran.</p>
+                </div>
+
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/60 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-unsGold/10 text-unsGold rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-computer"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-lg mb-2">Fasilitas Modern</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">Memiliki laboratorium simulasi perkantoran modern dengan perangkat keras dan lunak terkini sesuai tuntutan dunia kerja.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKEMA SERTIFIKASI SECTION -->
+    <section id="skema" class="py-20 bg-slate-50 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold text-unsTeal uppercase tracking-widest block mb-2">SKEMA KOMPETENSI</span>
+                <h3 class="text-3xl font-extrabold text-slate-800">Skema Sertifikasi yang Ditawarkan</h3>
+                <div class="w-20 h-1 bg-unsTeal mx-auto mt-4 rounded-full"></div>
+                <p class="text-slate-600 mt-4 leading-relaxed">Berikut adalah skema uji kompetensi yang dapat diikuti oleh mahasiswa maupun profesional umum di TUK LSP-KAP PAP UNS.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Scheme 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-unsBlue/10 text-unsBlue text-xs font-bold px-3 py-1 rounded-full">Level II KKNI</span>
+                            <span class="text-xs text-slate-400 font-semibold"><i class="fa-solid fa-tag"></i> Admin Perkantoran</span>
+                        </div>
+                        <h4 class="text-xl font-extrabold text-slate-800 mb-2">Skema Pelaksana Administrasi Kantor (Clerical Administrative)</h4>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">Sertifikasi yang memvalidasi kompetensi dasar dalam pengelolaan dokumen, surat-menyurat, pengarsipan, dan operasional harian kantor.</p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-4 flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-semibold"><i class="fa-solid fa-list-check mr-1.5 text-unsTeal"></i> 8 Unit Kompetensi</span>
+                        <button onclick="openSchemeDetail('clerical')" class="text-xs font-bold text-unsLightBlue hover:text-unsBlue transition-colors flex items-center gap-1">Detail Unit <i class="fa-solid fa-arrow-right-long"></i></button>
+                    </div>
+                </div>
+
+                <!-- Scheme 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-unsTeal/10 text-unsTeal text-xs font-bold px-3 py-1 rounded-full">Level III KKNI</span>
+                            <span class="text-xs text-slate-400 font-semibold"><i class="fa-solid fa-tag"></i> Sekretaris</span>
+                        </div>
+                        <h4 class="text-xl font-extrabold text-slate-800 mb-2">Skema Sekretaris Junior (Junior Secretary)</h4>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">Memvalidasi kompetensi untuk membantu pimpinan dalam menjadwalkan agenda, membuat notula, mengelola komunikasi bisnis, dan memelihara hubungan kerja.</p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-4 flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-semibold"><i class="fa-solid fa-list-check mr-1.5 text-unsTeal"></i> 11 Unit Kompetensi</span>
+                        <button onclick="openSchemeDetail('secretary')" class="text-xs font-bold text-unsLightBlue hover:text-unsBlue transition-colors flex items-center gap-1">Detail Unit <i class="fa-solid fa-arrow-right-long"></i></button>
+                    </div>
+                </div>
+
+                <!-- Scheme 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-amber-500/10 text-unsGold text-xs font-bold px-3 py-1 rounded-full">Level V KKNI</span>
+                            <span class="text-xs text-slate-400 font-semibold"><i class="fa-solid fa-tag"></i> Admin Eksekutif</span>
+                        </div>
+                        <h4 class="text-xl font-extrabold text-slate-800 mb-2">Skema Administrasi Kantor Eksekutif</h4>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">Menilai kompetensi pengelolaan administrasi strategis, pengorganisasian rapat tingkat tinggi, serta manajemen data bisnis perusahaan.</p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-4 flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-semibold"><i class="fa-solid fa-list-check mr-1.5 text-unsTeal"></i> 14 Unit Kompetensi</span>
+                        <button onclick="openSchemeDetail('executive')" class="text-xs font-bold text-unsLightBlue hover:text-unsBlue transition-colors flex items-center gap-1">Detail Unit <i class="fa-solid fa-arrow-right-long"></i></button>
+                    </div>
+                </div>
+
+                <!-- Scheme 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-emerald-500/10 text-emerald-600 text-xs font-bold px-3 py-1 rounded-full">Sertifikat Klaster</span>
+                            <span class="text-xs text-slate-400 font-semibold"><i class="fa-solid fa-tag"></i> Arsiparis</span>
+                        </div>
+                        <h4 class="text-xl font-extrabold text-slate-800 mb-2">Skema Klaster Pengelolaan Kearsipan (Records Management)</h4>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">Fokus pada keahlian pengelolaan siklus hidup dokumen dari penataan, pemeliharaan sistem kearsipan analog dan digital, hingga retensi arsip.</p>
+                    </div>
+                    <div class="border-t border-slate-100 pt-4 flex justify-between items-center">
+                        <span class="text-xs text-slate-500 font-semibold"><i class="fa-solid fa-list-check mr-1.5 text-unsTeal"></i> 6 Unit Kompetensi</span>
+                        <button onclick="openSchemeDetail('records')" class="text-xs font-bold text-unsLightBlue hover:text-unsBlue transition-colors flex items-center gap-1">Detail Unit <i class="fa-solid fa-arrow-right-long"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALUR PENDAFTARAN SECTION -->
+    <section id="alur" class="py-20 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold text-unsLightBlue uppercase tracking-widest block mb-2">LANGKAH-LANGKAH</span>
+                <h3 class="text-3xl font-extrabold text-slate-800">Alur Pendaftaran & Asesmen</h3>
+                <div class="w-20 h-1 bg-unsGold mx-auto mt-4 rounded-full"></div>
+                <p class="text-slate-600 mt-4 leading-relaxed">Bagaimana alur dari pendaftaran hingga diterbitkannya sertifikat kompetensi BNSP di TUK kami? Simak infografik interaktif berikut.</p>
+            </div>
+
+            <!-- TIMELINE GRAPHIC -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                <!-- Step 1 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center relative group hover:border-unsGold transition-all">
+                    <div class="w-12 h-12 bg-unsBlue text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 group-hover:bg-unsGold transition-colors">1</div>
+                    <h5 class="font-bold text-slate-800 mb-2">Registrasi Akun</h5>
+                    <p class="text-xs text-slate-600 leading-relaxed">Daftarkan diri Anda melalui Portal Asesi dan lengkapi berkas portofolio seperti APL-01 & APL-02.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center relative group hover:border-unsGold transition-all">
+                    <div class="w-12 h-12 bg-unsBlue text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 group-hover:bg-unsGold transition-colors">2</div>
+                    <h5 class="font-bold text-slate-800 mb-2">Verifikasi Berkas</h5>
+                    <p class="text-xs text-slate-600 leading-relaxed">Staf administrasi TUK memvalidasi dokumen dan kesesuaian persyaratan uji kompetensi asesi.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center relative group hover:border-unsGold transition-all">
+                    <div class="w-12 h-12 bg-unsBlue text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 group-hover:bg-unsGold transition-colors">3</div>
+                    <h5 class="font-bold text-slate-800 mb-2">Pelaksanaan Uji</h5>
+                    <p class="text-xs text-slate-600 leading-relaxed">Asesmen mandiri, ujian tulis, praktik langsung simulasi perkantoran, dan wawancara bersama Asesor.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center relative group hover:border-unsGold transition-all">
+                    <div class="w-12 h-12 bg-unsBlue text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 group-hover:bg-unsGold transition-colors">4</div>
+                    <h5 class="font-bold text-slate-800 mb-2">Keputusan & Sertifikasi</h5>
+                    <p class="text-xs text-slate-600 leading-relaxed">Rekomendasi "Kompeten" oleh Asesor diikuti dengan penerbitan Sertifikat resmi berlogo Garuda Emas BNSP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FASILITAS DAN DOKUMENTASI -->
+    <section class="py-20 bg-slate-50 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold text-unsTeal uppercase tracking-widest block mb-2">SARANA & PRASARANA</span>
+                <h3 class="text-3xl font-extrabold text-slate-800">Fasilitas Laboratorium & Uji</h3>
+                <div class="w-20 h-1 bg-unsTeal mx-auto mt-4 rounded-full"></div>
+                <p class="text-slate-600 mt-4 leading-relaxed">TUK LSP-KAP PAP UNS dilengkapi ruang laboratorium terakreditasi demi kenyamanan dan kejujuran proses uji kompetensi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Facility 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 group">
+                                          <img src="https://adp.fkip.uns.ac.id/wp-content/uploads/2024/12/KEYBOARDING-2-1-600x400.jpg" alt="Lab Perkantoran PAP UNS" class="w-full h-64 object-cover rounded-xl shadow-inner">
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-800 mb-1">Laboratorium Komputer & Kearsipan Elektronik</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Dipergunakan untuk ujian tulis berbasis komputer (CBT) serta uji praktik perangkat lunak kearsipan dan korespondensi digital.</p>
+                    </div>
+                </div>
+
+                <!-- Facility 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 group">
+                    <img src= "https://adp.fkip.uns.ac.id/wp-content/uploads/2024/12/MINI-OFFICE-1-600x400.jpg" alt="Lab Perkantoran PAP UNS" class="w-full h-64 object-cover rounded-xl shadow-inner">
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-800 mb-1">Ruang Simulasi Resepsionis & Kearsipan Fisik</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Ruang khusus uji praktik penanganan telepon, pelayanan tamu bisnis, kearsipan sistem fisik (kartu indeks/arsip surat) berstandar industri.</p>
+                    </div>
+                </div>
+
+                <!-- Facility 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 group">
+                    <img src="https://adp.fkip.uns.ac.id/wp-content/uploads/2024/12/OFFICE-TECHNOLOGY-1-800x533.jpg" alt="Lab Perkantoran PAP UNS" class="w-full h-64 object-cover rounded-xl shadow-inner">
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-800 mb-1">Ruang Uji Wawancara Profesional</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Ruangan hening yang dirancang khusus bagi asesi dan asesor untuk melakukan sesi wawancara portofolio yang interaktif dan objektif.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CEK KEASLIAN SERTIFIKAT (VERIFIKASI) SECTION -->
+    <section id="verifikasi" class="py-20 bg-white border-b border-slate-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-unsBlue to-unsLightBlue text-white rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-white/5 rounded-full z-0"></div>
+                <div class="absolute -left-6 -top-6 w-32 h-32 bg-white/5 rounded-full z-0"></div>
+
+                <div class="relative z-10">
+                    <div class="text-center mb-8">
+                        <span class="text-xs font-bold text-unsGold uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full"><i class="fa-solid fa-shield-halved mr-1"></i> VALIDASI DIGITAL</span>
+                        <h3 class="text-2xl md:text-3xl font-extrabold mt-3">Verifikasi Keaslian Sertifikat</h3>
+                        <p class="text-sm text-slate-200 mt-2">Pastikan sertifikat berlogo Garuda Emas yang Anda miliki terdaftar secara resmi di database TUK LSP-KAP PAP UNS.</p>
+                    </div>
+
+                    <div class="bg-white/10 p-2 rounded-xl border border-white/20 flex flex-col sm:flex-row gap-2 max-w-xl mx-auto">
+                        <input type="text" id="certNumber" placeholder="Masukkan Nomor Sertifikat (Contoh: REG-AP-2026/001)" class="w-full bg-white/10 text-white placeholder-slate-300 px-4 py-3 rounded-lg text-sm border-0 focus:ring-2 focus:ring-unsGold focus:outline-none font-mono">
+                        <button onclick="checkCertificate()" class="bg-unsGold hover:bg-amber-500 text-unsDark font-bold px-6 py-3 rounded-lg text-sm transition-colors whitespace-nowrap shadow-md">
+                            Verifikasi Sekarang
+                        </button>
+                    </div>
+
+                    <!-- Verification Result Box -->
+                    <div id="resultBox" class="hidden mt-6 bg-white text-slate-800 p-5 rounded-xl border border-slate-100 shadow-md max-w-xl mx-auto flex gap-4 items-start">
+                        <div class="text-emerald-500 text-2xl mt-0.5" id="resultIcon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-slate-800 text-sm" id="resultTitle">Sertifikat Terdaftar & Valid!</h5>
+                            <div class="text-xs text-slate-500 space-y-1 mt-1.5" id="resultDetails">
+                                <p><strong>Nama Asesi:</strong> <span id="resName">-</span></p>
+                                <p><strong>Skema:</strong> <span id="resScheme">-</span></p>
+                                <p><strong>Tanggal Terbit:</strong> <span id="resDate">-</span></p>
+                                <p><strong>Status:</strong> <span class="text-emerald-600 font-bold">Aktif</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MANAGEMENT STRUKTUR SECTION -->
+    <section id="struktur" class="py-20 bg-slate-50 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold text-unsTeal uppercase tracking-widest block mb-1">STRUKTUR ORGANISASI</span>
+                <h3 class="text-3xl font-extrabold text-slate-800">Manajemen Pengelola TUK LSP-KAP</h3>
+                <div class="w-20 h-1 bg-unsTeal mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="flex flex-col items-center gap-8">
+                <!-- MANAGER -->
+                <div class="w-full max-w-sm bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm hover:shadow-md transition-shadow relative">
+                    <div class="absolute top-4 right-4 text-xs font-bold text-unsGold uppercase bg-unsGold/10 px-2 py-0.5 rounded-full">Manager</div>
+                    <div class="w-16 h-16 bg-unsBlue/10 text-unsBlue rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <span class="text-xs font-extrabold text-unsLightBlue tracking-wider uppercase">Manajer TUK</span>
+                    <h4 class="text-lg font-bold text-slate-900 mt-1">Dra. Patni Ninghardjanti, M.Pd.</h4>
+                    <p class="text-xs text-slate-500 mt-1">NIP. 196311141989032001</p>
+                </div>
+
+                <!-- ARROW CONNECTOR -->
+                <div class="w-0.5 h-10 bg-gradient-to-b from-unsBlue/40 to-unsTeal/40"></div>
+
+                <!-- STAFF -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+                    <!-- Staff 1 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm hover:shadow-md transition-all relative">
+                        <div class="absolute top-4 right-4 text-xs font-bold text-unsTeal uppercase bg-unsTeal/10 px-2 py-0.5 rounded-full">Manajemen</div>
+                        <div class="w-12 h-12 bg-unsTeal/10 text-unsTeal rounded-full flex items-center justify-center mx-auto mb-3 text-lg">
+                            <i class="fa-solid fa-id-card-clip"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 tracking-wider uppercase">Staf Manajemen</span>
+                        <h5 class="text-md font-bold text-slate-800 mt-1">Dr. Susantiningrum, S.Pd., S.E., MAB.</h5>
+                        <p class="text-xs text-slate-500 mt-1">NIP. 197809182005012001</p>
+                    </div>
+
+                    <!-- Staff 2 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm hover:shadow-md transition-all relative">
+                        <div class="absolute top-4 right-4 text-xs font-bold text-unsTeal uppercase bg-unsTeal/10 px-2 py-0.5 rounded-full">Operasional</div>
+                        <div class="w-12 h-12 bg-unsTeal/10 text-unsTeal rounded-full flex items-center justify-center mx-auto mb-3 text-lg">
+                            <i class="fa-solid fa-id-card-clip"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 tracking-wider uppercase">Staf Operasional</span>
+                        <h5 class="text-md font-bold text-slate-800 mt-1">Didik Winarko</h5>
+                        <p class="text-xs text-slate-500 mt-1">Staf Pelaksana TUK</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALAMAT & KONTAK SECTION (DENGAN PETA & FORMULIR) -->
+    <section id="kontak" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Info & Form -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-xs font-bold text-unsLightBlue uppercase tracking-widest block">SEKRETARIAT</span>
+                        <h3 class="text-3xl font-extrabold text-slate-800 mt-1">Hubungi & Kunjungi Kami</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mt-2">
+                            Silakan kunjungi ruang sekretariat kami pada jam operasional kerja untuk informasi pendaftaran langsung, verifikasi berkas luring, dan konsultasi skema uji.
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-start gap-4">
+                            <div class="p-3 bg-unsBlue text-white rounded-xl text-lg mt-0.5">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wide">Pendidikan Administrasi Perkantoran</h4>
+                                <p class="text-sm font-semibold text-slate-800 mt-1 leading-relaxed">
+                                    Gedung B FKIP Universitas Sebelas Maret <br>
+                                    Jl. Ir. Sutami 36A Surakarta, Jawa Tengah 57126
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-start gap-4">
+                            <div class="p-3 bg-unsTeal text-white rounded-xl text-lg mt-0.5">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wide">Jam Operasional Pelayanan</h4>
+                                <p class="text-sm font-semibold text-slate-800 mt-1 leading-relaxed">
+                                    Senin - Jumat: 08:00 WIB - 15:30 WIB <br>
+                                    <span class="text-xs font-medium text-slate-500">*Istirahat pukul 12:00 - 13:00 WIB</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Consultation Form -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/60">
+                        <h4 class="font-bold text-slate-800 mb-3 text-sm"><i class="fa-solid fa-message text-unsTeal mr-1"></i> Ajukan Pertanyaan / Konsultasi</h4>
+                        <form id="consultationForm" onsubmit="handleConsultation(event)" class="space-y-3">
+                            <input type="text" id="consultName" placeholder="Nama Lengkap Anda" class="w-full text-xs px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none" required>
+                            <input type="email" id="consultEmail" placeholder="Email Aktif" class="w-full text-xs px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none" required>
+                            <textarea id="consultMsg" rows="3" placeholder="Pesan atau pertanyaan seputar sertifikasi..." class="w-full text-xs px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none" required></textarea>
+                            <button type="submit" class="w-full py-2.5 bg-unsBlue hover:bg-unsLightBlue text-white font-bold text-xs rounded-xl shadow transition-colors">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Interactive Visualization Map -->
+                <div class="lg:col-span-7 bg-slate-100 rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col h-[480px]">
+                    <!-- Simulated Map Header -->
+                    <div class="bg-white border-b border-slate-200 p-4 flex items-center justify-between z-10">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                            <span class="text-xs font-bold text-slate-800">Kampus Kentingan UNS Surakarta</span>
+                        </div>
+                        <a href="https://maps.google.com/?q=Gedung+B+FKIP+UNS" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-unsLightBlue hover:text-unsBlue flex items-center gap-1">
+                            Buka Google Maps <i class="fa-solid fa-location-arrow"></i>
+                        </a>
+                    </div>
+                    <!-- Map Canvas Representation -->
+                    <div class="bg-slate-200 relative flex-1 flex flex-col items-center justify-center text-center p-6" style="background-image: radial-gradient(#cbd5e1 2px, transparent 2px); background-size: 24px 24px;">
+                        <div class="bg-white/95 p-6 rounded-2xl shadow-xl border border-slate-300 max-w-sm relative z-10 flex flex-col items-center">
+                            <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-2xl mb-3 shadow-inner">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <h4 class="font-extrabold text-slate-800 text-sm">Gedung B FKIP UNS</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Kompleks Pendidikan Timur Kampus UNS, bersebelahan dengan Gedung Pascasarjana FKIP.</p>
+                            <span class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-unsBlue/10 text-unsBlue rounded-full text-[10px] font-bold">
+                                <i class="fa-solid fa-signs-post"></i> Lantai 2, Ruang Program Studi PAP
+                            </span>
+                        </div>
+                        
+                        <!-- Mini Radar Overlay (Visual Styling) -->
+                        <div class="absolute inset-0 pointer-events-none flex items-center justify-center opacity-40">
+                            <div class="w-64 h-64 border-2 border-dashed border-unsLightBlue/20 rounded-full animate-spin" style="animation-duration: 40s;"></div>
+                            <div class="w-96 h-96 border border-dashed border-unsLightBlue/10 rounded-full absolute"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-unsDark text-white py-12 border-t-4 border-unsGold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
+                <div class="md:col-span-5 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center border border-unsGold/50 p-1">
+                            <svg viewBox="0 0 100 100" class="w-full h-full fill-white">
+                                <path d="M50 15 L20 40 L30 75 L70 75 L80 40 Z" />
+                                <polygon points="50,22 35,42 45,42 42,68 65,35 52,35" fill="#e6a100" />
+                            </svg>
+                        </div>
+                        <span class="font-extrabold text-md tracking-tight">TUK LSP-KAP PAP UNS</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+                        Lembaga sertifikasi profesi terpercaya dalam penjaminan kompetensi sumber daya manusia di sektor klerikal administrasi perkantoran untuk kemajuan bangsa.
+                    </p>
+                </div>
+                <div class="md:col-span-4 space-y-2 text-xs">
+                    <h5 class="font-bold text-slate-300 border-b border-white/10 pb-2 mb-2">PRANALA LUAR</h5>
+                    <ul class="space-y-1.5 text-slate-400">
+                        <li><a href="https://uns.ac.id" target="_blank" rel="noopener" class="hover:text-unsGold transition-colors">Universitas Sebelas Maret</a></li>
+                        <li><a href="https://fkip.uns.ac.id" target="_blank" rel="noopener" class="hover:text-unsGold transition-colors">FKIP UNS</a></li>
+                        <li><a href="https://pap.fkip.uns.ac.id" target="_blank" rel="noopener" class="hover:text-unsGold transition-colors">Program Studi Pendidikan PAP</a></li>
+                        <li><a href="https://bnsp.go.id" target="_blank" rel="noopener" class="hover:text-unsGold transition-colors">BNSP RI</a></li>
+                    </ul>
+                </div>
+                <div class="md:col-span-3 space-y-2 text-xs text-slate-400">
+                    <h5 class="font-bold text-slate-300 border-b border-white/10 pb-2 mb-2">HUBUNGI KAMI</h5>
+                    <p><i class="fa-solid fa-phone text-unsGold mr-1.5"></i> (0271) 662621 ext. 110</p>
+                    <p><i class="fa-solid fa-envelope text-unsGold mr-1.5"></i> pap@fkip.uns.ac.id</p>
+                    <p><i class="fa-solid fa-location-dot text-unsGold mr-1.5"></i> Gedung B FKIP UNS, Kentingan</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 TUK LSP-KAP Universitas Sebelas Maret Surakarta. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white transition-colors">Statuta UNS</a>
+                    <span>|</span>
+                    <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ==========================================
+         PORTAL ASESI MODAL
+    =========================================== -->
+    <div id="portalModal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center bg-black/60 p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 overflow-hidden transform transition-all">
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-unsBlue to-unsLightBlue text-white p-5 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-user-graduate text-unsGold text-lg"></i>
+                    <h4 class="font-extrabold text-sm tracking-wide">PORTAL ASESI TUK PAP UNS</h4>
+                </div>
+                <button onclick="toggleModal('portalModal')" class="text-white/80 hover:text-white text-lg focus:outline-none">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6">
+                <p class="text-xs text-slate-500 mb-4 leading-relaxed">Selamat datang di sistem manajemen sertifikasi asesi. Pilih tindakan atau login menggunakan kredensial Anda.</p>
+                
+                <form id="loginForm" onsubmit="handlePortalLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nomor Induk / Username</label>
+                        <input type="text" placeholder="Username atau NIM Anda" class="w-full text-sm px-3.5 py-2.5 border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Kata Sandi</label>
+                        <input type="password" placeholder="••••••••" class="w-full text-sm px-3.5 py-2.5 border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none" required>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <label class="flex items-center gap-1.5 text-slate-500">
+                            <input type="checkbox" class="rounded border-slate-300 text-unsLightBlue focus:ring-0"> Ingat saya
+                        </label>
+                        <a href="#" class="text-unsLightBlue font-bold hover:underline">Lupa Kata Sandi?</a>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-unsBlue to-unsLightBlue hover:from-unsLightBlue hover:to-unsTeal text-white font-extrabold text-xs rounded-xl tracking-wider shadow transition-all uppercase">
+                        MASUK PORTAL
+                    </button>
+                </form>
+
+                <div class="border-t border-slate-100 my-4 pt-4 text-center">
+                    <p class="text-xs text-slate-500">Belum pernah mendaftar?</p>
+                    <button onclick="toggleModal('portalModal'); toggleModal('registerModal')" class="mt-2 text-xs font-bold text-unsGold hover:text-amber-600 transition-colors uppercase">Buat Akun Asesi Baru</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         REGISTER ASESI MODAL
+    =========================================== -->
+    <div id="registerModal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center bg-black/60 p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl border border-slate-100 overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-unsTeal to-unsLightBlue text-white p-5 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus text-unsGold text-lg"></i>
+                    <h4 class="font-extrabold text-sm tracking-wide">PENDAFTARAN ASESI BARU</h4>
+                </div>
+                <button onclick="toggleModal('registerModal')" class="text-white/80 hover:text-white text-lg focus:outline-none">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Body -->
+            <form id="registerForm" onsubmit="handleRegistration(event)" class="p-6 space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nama Lengkap</label>
+                        <input type="text" placeholder="Contoh: Budi Santoso" class="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">NIM / NIK / No. KTP</label>
+                        <input type="text" placeholder="Masukkan 16 digit NIK/NIM" class="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none" required>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Email Aktif</label>
+                        <input type="email" placeholder="contoh@student.uns.ac.id" class="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nomor WhatsApp</label>
+                        <input type="tel" placeholder="08xxxxxxxxxx" class="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Pilihan Skema Sertifikasi</label>
+                    <select class="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:ring-1 focus:ring-unsLightBlue focus:outline-none bg-white">
+                        <option value="clerical">Skema Pelaksana Administrasi Kantor (Clerical)</option>
+                        <option value="secretary">Skema Sekretaris Junior (Junior Secretary)</option>
+                        <option value="executive">Skema Administrasi Kantor Eksekutif</option>
+                        <option value="records">Skema Klaster Pengelolaan Kearsipan</option>
+                    </select>
+                </div>
+
+                <div class="flex items-start gap-2 text-[11px] text-slate-500 leading-relaxed">
+                    <input type="checkbox" class="mt-0.5 rounded border-slate-300 text-unsTeal focus:ring-0" required>
+                    <label>Saya menyatakan bersedia mengunggah dokumen prasyarat seperti KTP/KTM, CV, Transkrip nilai, dan pasfoto berwarna sesuai arahan.</label>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-unsTeal to-unsLightBlue text-white font-extrabold text-xs rounded-xl tracking-wider shadow transition-colors uppercase">
+                    REGISTRASI AKUN ASESI
+                </button>
+
+                <div class="text-center">
+                    <button type="button" onclick="toggleModal('registerModal'); toggleModal('portalModal')" class="text-xs text-unsLightBlue font-bold hover:underline">Sudah punya akun? Login di sini</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         DETAIL SKEMA MODAL
+    =========================================== -->
+    <div id="schemeModal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center bg-black/60 p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl w-full max-w-xl shadow-2xl border border-slate-100 overflow-hidden">
+            <!-- Header -->
+            <div class="bg-unsBlue text-white p-5 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-unsGold"></i>
+                    <h4 class="font-extrabold text-sm tracking-wide" id="schemeModalTitle">DETAIL UNIT SKEMA KOMPETENSI</h4>
+                </div>
+                <button onclick="toggleModal('schemeModal')" class="text-white/80 hover:text-white text-lg focus:outline-none">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <!-- Body Content -->
+            <div class="p-6">
+                <h5 class="font-bold text-xs text-slate-400 uppercase tracking-widest mb-3" id="schemeModalLevel">SKEMA TUK LSP-KAP</h5>
+                <p class="text-xs text-slate-600 mb-4 leading-relaxed" id="schemeModalDesc">Rincian standar kompetensi kerja nasional Indonesia (SKKNI) yang diujikan dalam skema ini.</p>
+                
+                <h6 class="font-bold text-xs text-slate-800 uppercase border-b border-slate-100 pb-2 mb-2">Daftar Unit Kompetensi:</h6>
+                <div class="h-64 overflow-y-auto custom-scrollbar pr-2 text-xs text-slate-700 space-y-2 font-medium" id="schemeModalUnits">
+                    <!-- Dynamic units load via JS -->
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button onclick="toggleModal('schemeModal')" class="px-5 py-2.5 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl font-bold text-xs">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         NOTIFICATION MESSAGE COMPONENT (CUSTOM DIALOG)
+    =========================================== -->
+    <div id="notifyBox" class="hidden fixed bottom-6 right-6 z-50 max-w-sm bg-slate-900/95 text-white p-4 rounded-xl shadow-2xl border border-white/10 flex items-start gap-3 transition-transform">
+        <div id="notifyIcon" class="text-unsGold mt-0.5"><i class="fa-solid fa-bell"></i></div>
+        <div>
+            <h5 class="font-bold text-xs" id="notifyTitle">Sistem Informasi</h5>
+            <p class="text-[11px] text-slate-300 leading-relaxed mt-1" id="notifyText">Pesan pemberitahuan akan tampil di sini.</p>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGICAL & INTERACTIVE FUNCTIONS -->
+    <script>
+        // Toggle Modals
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.toggle('hidden');
+                modal.classList.toggle('flex');
+            }
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('mobileMenuIcon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = 'fa-solid fa-xmark text-xl';
+            } else {
+                menu.classList.add('hidden');
+                icon.className = 'fa-solid fa-bars text-xl';
+            }
+        }
+
+        // Custom Notification Bar
+        function showNotification(title, message, iconType = 'info') {
+            const box = document.getElementById('notifyBox');
+            const icon = document.getElementById('notifyIcon');
+            const titleEl = document.getElementById('notifyTitle');
+            const textEl = document.getElementById('notifyText');
+
+            titleEl.textContent = title;
+            textEl.textContent = message;
+
+            if (iconType === 'success') {
+                icon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>';
+            } else if (iconType === 'error') {
+                icon.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-rose-500 text-lg"></i>';
+            } else {
+                icon.innerHTML = '<i class="fa-solid fa-circle-info text-unsGold text-lg"></i>';
+            }
+
+            box.classList.remove('hidden');
+            setTimeout(() => {
+                box.classList.add('hidden');
+            }, 4500);
+        }
+
+        // Handle Quick Consultation Submission
+        function handleConsultation(e) {
+            e.preventDefault();
+            const name = document.getElementById('consultName').value;
+            const email = document.getElementById('consultEmail').value;
+            const message = document.getElementById('consultMsg').value;
+
+            if (name && email && message) {
+                showNotification("Pesan Terkirim!", `Halo ${name}, tim admin kami akan segera membalas email Anda. Terima kasih!`, "success");
+                document.getElementById('consultationForm').reset();
+            }
+        }
+
+        // Handle Portal Login
+        function handlePortalLogin(e) {
+            e.preventDefault();
+            showNotification("Sistem Demo", "Portal saat ini dalam mode pemeliharaan rutin. Silakan lakukan registrasi asesi baru terlebih dahulu.", "info");
+            toggleModal('portalModal');
+        }
+
+        // Handle Registration
+        function handleRegistration(e) {
+            e.preventDefault();
+            showNotification("Registrasi Berhasil!", "Data Anda telah disimpan secara virtual. TUK akan menghubungi Anda melalui WhatsApp untuk tahap verifikasi berkas.", "success");
+            document.getElementById('registerForm').reset();
+            toggleModal('registerModal');
+        }
+
+        // Certificate Checking Simulation
+        const mockCertificates = {
+            'REG-AP-2026/001': { name: 'Siti Rahmawati', scheme: 'Pelaksana Administrasi Kantor (Clerical)', date: '12 Februari 2026' },
+            'REG-AP-2026/002': { name: 'Muhammad Fauzan', scheme: 'Sekretaris Junior (Junior Secretary)', date: '15 Maret 2026' },
+            'REG-AP-2026/003': { name: 'Dwi Prasetyo', scheme: 'Administrasi Kantor Eksekutif', date: '20 April 2026' }
+        };
+
+        function checkCertificate() {
+            const code = document.getElementById('certNumber').value.trim();
+            const resultBox = document.getElementById('resultBox');
+            const resName = document.getElementById('resName');
+            const resScheme = document.getElementById('resScheme');
+            const resDate = document.getElementById('resDate');
+
+            if (!code) {
+                showNotification("Peringatan", "Silakan masukkan nomor registrasi sertifikat terlebih dahulu.", "error");
+                return;
+            }
+
+            if (mockCertificates[code]) {
+                resName.textContent = mockCertificates[code].name;
+                resScheme.textContent = mockCertificates[code].scheme;
+                resDate.textContent = mockCertificates[code].date;
+                resultBox.classList.remove('hidden');
+                showNotification("Validasi Berhasil", "Sertifikat terdaftar dalam sistem database TUK.", "success");
+            } else {
+                resultBox.classList.add('hidden');
+                showNotification("Tidak Ditemukan", "Nomor sertifikat tidak valid atau belum disinkronkan ke server pusat. Silakan laporkan ke admin.", "error");
+            }
+        }
+
+        // Scheme Details Data Mapping
+        const schemeDetails = {
+            'clerical': {
+                title: 'Pelaksana Administrasi Kantor',
+                level: 'Level II KKNI - Clerical Administrative',
+                desc: 'Skema ini dirancang untuk menilai kompetensi pelaksana staf junior perkantoran yang menangani pekerjaan teknis harian kantor umum.',
+                units: [
+                    'N.821100.001.02 - Menangani Penerimaan/Pengiriman Surat/Dokumen',
+                    'N.821100.002.02 - Memproduksi Dokumen di Komputer',
+                    'N.821100.003.02 - Mengoperasikan Aplikasi Perangkat Lunak',
+                    'N.821100.004.02 - Menggunakan Peralatan Kantor',
+                    'N.821100.005.02 - Melakukan Komunikasi Melalui Telepon',
+                    'N.821100.006.01 - Melakukan Komunikasi Lisan dengan Kolega/Pelanggan',
+                    'N.821100.007.02 - Mengelola Arsip Surat/Dokumen Kantor',
+                    'N.821100.008.01 - Memelihara Kebersihan dan Kerapian Area Kerja'
+                ]
+            },
+            'secretary': {
+                title: 'Sekretaris Junior',
+                level: 'Level III KKNI - Junior Secretary',
+                desc: 'Dirancang bagi asesi yang memiliki peran administrasi strategis berhadapan langsung dengan atasan, kolega internal, dan pimpinan unit bisnis.',
+                units: [
+                    'N.821100.001.02 - Menulis Surat Bisnis Profesional',
+                    'N.821100.002.02 - Mengelola Agenda Agenda Perjalanan Atasan',
+                    'N.821100.003.02 - Mengatur Jadwal Rapat & Kepemimpinan',
+                    'N.821100.004.02 - Membuat Notula Rapat Tingkat Unit',
+                    'N.821100.005.02 - Menangani Layanan Informasi Pelanggan',
+                    'N.821100.006.01 - Menerjemahkan Istilah Administrasi Bisnis',
+                    'N.821100.007.02 - Mengembangkan Sistem Kearsipan yang Dinamis',
+                    'N.821100.008.01 - Mengoperasikan Mesin Pengolah Data Presentasi',
+                    'N.821100.009.02 - Melakukan Presentasi Kerja Lisan',
+                    'N.821100.010.02 - Menyusun Laporan Keuangan Kas Kecil',
+                    'N.821100.011.02 - Memberikan Layanan Administrasi Secara Prima'
+                ]
+            },
+            'executive': {
+                title: 'Administrasi Kantor Eksekutif',
+                level: 'Level V KKNI - Executive Administrator',
+                desc: 'Sertifikasi uji kompetensi setara kepala koordinator tata usaha atau sekretaris korporat yang bertugas merancang koordinasi alur operasional multi-divisi.',
+                units: [
+                    'N.821100.020.02 - Menyusun Standar Operasional Prosedur Kantor',
+                    'N.821100.021.02 - Merancang Sistem Manajemen Informasi Perkantoran',
+                    'N.821100.022.02 - Memimpin dan Mengarahkan Kelompok Kerja Mandiri',
+                    'N.821100.023.02 - Melakukan Negosiasi Kerja Bisnis Tingkat Lanjut',
+                    'N.821100.024.02 - Mengelola Hubungan Eksternal Lembaga',
+                    'N.821100.025.02 - Menyusun Rencana Anggaran Belanja Sarana Kantor',
+                    'N.821100.026.02 - Mengawasi Alur Pengelolaan Retensi Dokumen',
+                    'N.821100.027.02 - Menyelenggarakan Rapat Pemegang Saham (RPS)',
+                    'N.821100.028.02 - Membuat Dokumen Strategis Kebijakan Kantor',
+                    'N.821100.029.02 - Melakukan Manajemen Risiko Operasional Administrasi'
+                ]
+            },
+            'records': {
+                title: 'Pengelolaan Kearsipan',
+                level: 'Klaster Sertifikat - Records Management Specialist',
+                desc: 'Sertifikasi kompetensi khusus yang menilai kecakapan mendalam dalam proses digitalisasi dan pelestarian arsip vital fisik maupun digital.',
+                units: [
+                    'N.821100.040.02 - Merancang Sistem Penyimpanan Arsip Terpadu',
+                    'N.821100.041.02 - Melakukan Pemeliharaan File Arsip Fisik',
+                    'N.821100.042.02 - Melakukan Alih Media (Digitalisasi) Dokumen',
+                    'N.821100.043.02 - Merancang Indeks Penomoran Klasifikasi Arsip',
+                    'N.821100.044.02 - Mengoperasikan Sistem Database Kearsipan Digital',
+                    'N.821100.045.02 - Menyusun Dokumen Retensi Pemusnahan Arsip'
+                ]
+            }
+        };
+
+        function openSchemeDetail(key) {
+            const data = schemeDetails[key];
+            if (!data) return;
+
+            document.getElementById('schemeModalTitle').textContent = `DETAIL SKEMA: ${data.title.toUpperCase()}`;
+            document.getElementById('schemeModalLevel').textContent = data.level;
+            document.getElementById('schemeModalDesc').textContent = data.desc;
+
+            const unitContainer = document.getElementById('schemeModalUnits');
+            unitContainer.innerHTML = '';
+
+            data.units.forEach(unit => {
+                const row = document.createElement('div');
+                row.className = 'p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center gap-2 hover:bg-white transition-all';
+                row.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 flex-shrink-0"></i> <span>${unit}</span>`;
+                unitContainer.appendChild(row);
+            });
+
+            toggleModal('schemeModal');
+        }
+    </script>
+</body>
+</html>
